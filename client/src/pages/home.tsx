@@ -24,11 +24,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <img 
-                src="/attached_assets/Screenshot 2025-02-17 at 5.38.59 PM_1753398636178.png" 
-                alt="CosmicBrain AI" 
-                className="h-8"
-              />
+              <h1 className="text-xl font-bold text-gray-900">CosmicBrain AI</h1>
               <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">Beta</span>
             </div>
             <nav className="flex space-x-6">
@@ -83,11 +79,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
-              <img 
-                src="/attached_assets/Screenshot 2025-02-17 at 5.38.59 PM_1753398636178.png" 
-                alt="CosmicBrain AI" 
-                className="h-6"
-              />
+              <span className="text-gray-900 font-semibold">CosmicBrain AI</span>
               <span className="text-gray-600 text-sm">© 2025 CosmicBrain AI</span>
             </div>
             <div className="flex space-x-6 text-sm text-gray-600">
