@@ -54,7 +54,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "Free",
     complexity: "Intermediate",
     lastUpdated: "1 week ago",
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=200&fit=crop&crop=center&q=80"
+    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=200&fit=crop&crop=center&q=80"
   },
   {
     id: "3",
@@ -70,7 +70,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$299",
     complexity: "Advanced",
     lastUpdated: "3 days ago",
-    image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=300&h=200&fit=crop&crop=center&q=80"
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&crop=center&q=80"
   },
   {
     id: "4",
@@ -86,7 +86,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$49",
     complexity: "Beginner",
     lastUpdated: "5 days ago",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop&crop=center&q=80"
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&h=200&fit=crop&crop=center&q=80"
   },
   {
     id: "5",
@@ -102,7 +102,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$899",
     complexity: "Advanced",
     lastUpdated: "1 day ago",
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=300&h=200&fit=crop&crop=center&q=80"
+    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=300&h=200&fit=crop&crop=center&q=80"
   },
   {
     id: "6",
@@ -118,7 +118,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$89",
     complexity: "Intermediate",
     lastUpdated: "1 week ago",
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop&crop=center&q=80"
+    image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300&h=200&fit=crop&crop=center&q=80"
   }
 ];
 
