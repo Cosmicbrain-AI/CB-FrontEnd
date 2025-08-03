@@ -6,6 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 
+// Import generated robot images
+import robotCuttingOnions from "@assets/generated_images/Robot_cutting_onions_chef_7f1761b6.png";
+import robotAssemblingPCB from "@assets/generated_images/Robot_assembling_PCB_electronics_de1d7aac.png";
+import surgicalRobotRoom from "@assets/generated_images/Surgical_robot_operating_room_5e2d741e.png";
+import warehouseRobotWheels from "@assets/generated_images/Warehouse_robot_on_wheels_7ded1ae9.png";
+import robotCleaningFloor from "@assets/generated_images/Robot_cleaning_floor_home_efd3621f.png";
+import gardenRobotWatering from "@assets/generated_images/Garden_robot_watering_plants_95d6461a.png";
+
 interface SkillsetVLA {
   id: string;
   name: string;
@@ -38,7 +46,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$149",
     complexity: "Advanced",
     lastUpdated: "2 days ago",
-    image: "https://images.unsplash.com/photo-1565087222271-0a9f8a7cb5d2?w=300&h=200&fit=crop&crop=center&q=80"
+    image: robotAssemblingPCB
   },
   {
     id: "2",
@@ -54,7 +62,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "Free",
     complexity: "Intermediate",
     lastUpdated: "1 week ago",
-    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=200&fit=crop&crop=center&q=80"
+    image: warehouseRobotWheels
   },
   {
     id: "3",
@@ -70,7 +78,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$299",
     complexity: "Advanced",
     lastUpdated: "3 days ago",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&crop=center&q=80"
+    image: robotCuttingOnions
   },
   {
     id: "4",
@@ -86,7 +94,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$49",
     complexity: "Beginner",
     lastUpdated: "5 days ago",
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&h=200&fit=crop&crop=center&q=80"
+    image: robotCleaningFloor
   },
   {
     id: "5",
@@ -102,7 +110,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$899",
     complexity: "Advanced",
     lastUpdated: "1 day ago",
-    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=300&h=200&fit=crop&crop=center&q=80"
+    image: surgicalRobotRoom
   },
   {
     id: "6",
@@ -118,7 +126,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$89",
     complexity: "Intermediate",
     lastUpdated: "1 week ago",
-    image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300&h=200&fit=crop&crop=center&q=80"
+    image: gardenRobotWatering
   }
 ];
 
