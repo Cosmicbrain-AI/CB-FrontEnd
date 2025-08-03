@@ -72,7 +72,9 @@ export default function Home() {
         <ProcessingQueue />
 
         {/* Skillset Marketplace */}
-        <SkillsetMarketplace />
+        <div id="marketplace">
+          <SkillsetMarketplace />
+        </div>
       </main>
 
       {/* Footer */}

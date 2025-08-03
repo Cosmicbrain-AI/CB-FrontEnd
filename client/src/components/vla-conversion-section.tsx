@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Cog, Download, Loader2, Sparkles, Bot } from "lucide-react";
+import { Cog, Download, Loader2, Sparkles, Bot, Eye, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -331,56 +331,74 @@ export default function VlaConversionSection() {
           </div>
 
           {robotRecommendations.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-4">
               {robotRecommendations.map((robot, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg overflow-hidden bg-white hover:shadow-md transition-shadow">
-                  <div className="relative">
-                    <img 
-                      src={robot.image || `https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=300&h=150&fit=crop&crop=center&q=80`}
-                      alt={`${robot.brand} ${robot.model}`}
-                      className="w-full h-24 object-cover"
-                    />
-                    <div className="absolute top-2 right-2">
-                      <div className="bg-accent text-white text-xs px-2 py-1 rounded-full font-medium">
-                        {Math.round(robot.confidence * 100)}% Match
+                <div key={index} className="bg-gradient-to-r from-blue-50 via-white to-purple-50 border-2 border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+                  <div className="flex flex-col md:flex-row">
+                    {/* Robot Image Section */}
+                    <div className="md:w-1/3 relative">
+                      <img 
+                        src={robot.image || `https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop&crop=center&q=80`}
+                        alt={`${robot.brand} ${robot.model}`}
+                        className="w-full h-48 md:h-full object-cover"
+                      />
+                      <div className="absolute top-3 left-3">
+                        <div className="bg-gradient-to-r from-green-500 to-blue-500 text-white text-sm px-3 py-1 rounded-full font-bold shadow-lg">
+                          {Math.round(robot.confidence * 100)}% AI Match
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h5 className="font-semibold text-gray-900">{robot.brand} {robot.model}</h5>
-                        <span className="text-xs text-gray-600">{robot.availability}</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-lg font-bold text-primary">{robot.price}</div>
+                      <div className="absolute bottom-3 right-3">
+                        <div className="bg-black/70 text-white text-xs px-2 py-1 rounded-full">
+                          {robot.availability}
+                        </div>
                       </div>
                     </div>
                     
-                    <p className="text-xs text-gray-600 mb-3 line-clamp-2">{robot.reasoning}</p>
-                    
-                    <div className="grid grid-cols-3 gap-2 text-xs mb-3">
-                      <div className="text-center p-2 bg-gray-50 rounded">
-                        <div className="font-medium text-gray-900">{robot.specs.payload}</div>
-                        <div className="text-gray-500">Payload</div>
+                    {/* Content Section */}
+                    <div className="md:w-2/3 p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h5 className="text-xl font-bold text-gray-900 mb-1">{robot.brand}</h5>
+                          <p className="text-lg text-primary font-semibold">{robot.model}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-green-600">{robot.price}</div>
+                        </div>
                       </div>
-                      <div className="text-center p-2 bg-gray-50 rounded">
-                        <div className="font-medium text-gray-900">{robot.specs.reach}</div>
-                        <div className="text-gray-500">Reach</div>
+                      
+                      <p className="text-sm text-gray-700 mb-4 leading-relaxed">{robot.reasoning}</p>
+                      
+                      {/* Technical Specs */}
+                      <div className="grid grid-cols-3 gap-3 mb-4">
+                        <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-lg text-center border border-blue-200">
+                          <div className="font-bold text-blue-900 text-lg">{robot.specs.payload}</div>
+                          <div className="text-blue-700 text-xs font-medium">Max Payload</div>
+                        </div>
+                        <div className="bg-gradient-to-br from-green-50 to-green-100 p-3 rounded-lg text-center border border-green-200">
+                          <div className="font-bold text-green-900 text-lg">{robot.specs.reach}</div>
+                          <div className="text-green-700 text-xs font-medium">Working Reach</div>
+                        </div>
+                        <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-3 rounded-lg text-center border border-purple-200">
+                          <div className="font-bold text-purple-900 text-lg">{robot.specs.repeatability}</div>
+                          <div className="text-purple-700 text-xs font-medium">Precision</div>
+                        </div>
                       </div>
-                      <div className="text-center p-2 bg-gray-50 rounded">
-                        <div className="font-medium text-gray-900">{robot.specs.repeatability}</div>
-                        <div className="text-gray-500">Accuracy</div>
+                      
+                      {/* Action Buttons */}
+                      <div className="flex space-x-3">
+                        <Button variant="outline" size="sm" className="flex-1 border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 font-medium">
+                          <Eye className="mr-2" size={14} />
+                          View Details
+                        </Button>
+                        <Button variant="outline" size="sm" className="flex-1 border-2 border-gray-300 hover:border-green-500 hover:text-green-600 font-medium">
+                          <FileText className="mr-2" size={14} />
+                          Get Quote
+                        </Button>
+                        <Button size="sm" className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-lg">
+                          <Bot className="mr-2" size={14} />
+                          Select Robot
+                        </Button>
                       </div>
-                    </div>
-                    
-                    <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" className="text-xs flex-1">
-                        View Specs
-                      </Button>
-                      <Button size="sm" className="text-xs flex-1 bg-accent hover:bg-accent/90">
-                        Select Robot
-                      </Button>
                     </div>
                   </div>
                 </div>
