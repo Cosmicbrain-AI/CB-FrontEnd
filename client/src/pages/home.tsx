@@ -5,6 +5,8 @@ import SyntheticDataSection from "@/components/synthetic-data-section";
 import VlaConversionSection from "@/components/vla-conversion-section";
 import WorkflowProgress from "@/components/workflow-progress";
 import ProcessingQueue from "@/components/processing-queue";
+import AIPromptBox from "@/components/ai-prompt-box";
+import SkillsetMarketplace from "@/components/skillset-marketplace";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("upload");
@@ -29,30 +31,23 @@ export default function Home() {
             </div>
             <nav className="flex space-x-6">
               <button
-                onClick={() => scrollToSection("upload")}
+                onClick={() => scrollToSection("platform")}
                 className={`font-medium transition-colors ${
-                  activeSection === "upload" ? "text-primary" : "text-gray-600 hover:text-primary"
+                  activeSection === "platform" ? "text-primary" : "text-gray-600 hover:text-primary"
                 }`}
               >
-                Upload
+                Platform
               </button>
               <button
-                onClick={() => scrollToSection("synthetic")}
+                onClick={() => scrollToSection("marketplace")}
                 className={`font-medium transition-colors ${
-                  activeSection === "synthetic" ? "text-primary" : "text-gray-600 hover:text-primary"
+                  activeSection === "marketplace" ? "text-primary" : "text-gray-600 hover:text-primary"
                 }`}
               >
-                Synthetic
+                Marketplace
               </button>
-              <button
-                onClick={() => scrollToSection("vla")}
-                className={`font-medium transition-colors ${
-                  activeSection === "vla" ? "text-primary" : "text-gray-600 hover:text-primary"
-                }`}
-              >
-                VLA
-              </button>
-              <a href="#help" className="text-gray-600 hover:text-primary transition-colors font-medium">Help</a>
+              <a href="#profile" className="text-gray-600 hover:text-primary transition-colors font-medium">Profile</a>
+              <a href="#enterprise" className="text-gray-600 hover:text-primary transition-colors font-medium">Enterprise</a>
             </nav>
           </div>
         </div>
@@ -60,11 +55,14 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* AI Prompt Box */}
+        <AIPromptBox />
+
         {/* Workflow Progress */}
         <WorkflowProgress />
 
-        {/* Three Main Sections */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Platform Section - Three Main Processing Steps */}
+        <div id="platform" className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <VideoUploadSection />
           <SyntheticDataSection />
           <VlaConversionSection />
@@ -72,6 +70,9 @@ export default function Home() {
 
         {/* Processing Queue */}
         <ProcessingQueue />
+
+        {/* Skillset Marketplace */}
+        <SkillsetMarketplace />
       </main>
 
       {/* Footer */}

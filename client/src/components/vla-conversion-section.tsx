@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Cog, Download, Loader2 } from "lucide-react";
+import { Cog, Download, Loader2, Sparkles, Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,6 +18,8 @@ export default function VlaConversionSection() {
   const [languageAnnotations, setLanguageAnnotations] = useState("");
   const [outputFormat, setOutputFormat] = useState("tensorflow");
   const [compression, setCompression] = useState("none");
+  const [robotRecommendations, setRobotRecommendations] = useState<any[]>([]);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const { toast } = useToast();
 
   const { data: videos = [] } = useQuery<Video[]>({
@@ -107,6 +109,63 @@ export default function VlaConversionSection() {
         ? [...prev, videoId]
         : prev.filter(id => id !== videoId)
     );
+  };
+
+  const analyzeRobotRequirements = async () => {
+    setIsAnalyzing(true);
+    
+    // Simulate AI analysis
+    setTimeout(() => {
+      const mockRecommendations = [
+        {
+          brand: "Universal Robots",
+          model: "UR5e",
+          confidence: 0.92,
+          reasoning: "Ideal for precision tasks with excellent reach and payload capacity",
+          specs: {
+            payload: "5kg",
+            reach: "850mm",
+            repeatability: "±0.03mm"
+          },
+          price: "$35,000 - $50,000",
+          availability: "In Stock"
+        },
+        {
+          brand: "KUKA",
+          model: "KR3 R540",
+          confidence: 0.87,
+          reasoning: "Compact design perfect for assembly tasks in confined spaces",
+          specs: {
+            payload: "3kg",
+            reach: "541mm",
+            repeatability: "±0.02mm"
+          },
+          price: "$25,000 - $35,000",
+          availability: "2-3 weeks"
+        },
+        {
+          brand: "ABB",
+          model: "IRB120",
+          confidence: 0.83,
+          reasoning: "Cost-effective solution with reliable performance for repetitive tasks",
+          specs: {
+            payload: "3kg",
+            reach: "580mm",
+            repeatability: "±0.01mm"
+          },
+          price: "$20,000 - $30,000",
+          availability: "In Stock"
+        }
+      ];
+      
+      setRobotRecommendations(mockRecommendations);
+      setIsAnalyzing(false);
+      
+      toast({
+        title: "AI Analysis Complete",
+        description: "Found 3 robot recommendations based on your skillset requirements.",
+      });
+    }, 3000);
   };
 
   const formatFileSize = (bytes: number): string => {
@@ -243,6 +302,84 @@ export default function VlaConversionSection() {
           </div>
         </div>
 
+        {/* AI Robot Identification */}
+        <div className="border-t border-gray-200 pt-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h4 className="text-sm font-medium text-gray-900 flex items-center">
+                <Sparkles className="text-accent mr-2" size={16} />
+                AI Robot Recommendations
+              </h4>
+              <p className="text-xs text-gray-600">Get AI-powered robot suggestions for your skillset</p>
+            </div>
+            <Button
+              onClick={analyzeRobotRequirements}
+              disabled={isAnalyzing || selectedVideos.length === 0}
+              variant="outline"
+              size="sm"
+            >
+              {isAnalyzing ? (
+                <Loader2 className="mr-2" size={14} />
+              ) : (
+                <Bot className="mr-2" size={14} />
+              )}
+              Analyze Requirements
+            </Button>
+          </div>
+
+          {robotRecommendations.length > 0 && (
+            <div className="space-y-3">
+              {robotRecommendations.map((robot, index) => (
+                <div key={index} className="border border-gray-200 rounded-lg p-3 bg-gradient-to-r from-accent/5 to-secondary/5">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h5 className="font-medium text-gray-900">{robot.brand} {robot.model}</h5>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <div className="bg-accent text-white text-xs px-2 py-1 rounded">
+                          {Math.round(robot.confidence * 100)}% Match
+                        </div>
+                        <span className="text-xs text-gray-600">{robot.availability}</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm font-semibold text-gray-900">{robot.price}</div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-xs text-gray-600 mb-2">{robot.reasoning}</p>
+                  
+                  <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                      <span className="text-gray-500">Payload:</span>
+                      <div className="font-medium">{robot.specs.payload}</div>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">Reach:</span>
+                      <div className="font-medium">{robot.specs.reach}</div>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">Accuracy:</span>
+                      <div className="font-medium">{robot.specs.repeatability}</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex space-x-2 mt-3">
+                    <Button variant="outline" size="sm" className="text-xs">
+                      View Specs
+                    </Button>
+                    <Button variant="outline" size="sm" className="text-xs">
+                      Get Quote
+                    </Button>
+                    <Button size="sm" className="text-xs bg-accent hover:bg-accent/90">
+                      Select Robot
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         {/* Convert Button */}
         <Button
           onClick={() => convertMutation.mutate()}
@@ -268,10 +405,10 @@ export default function VlaConversionSection() {
             </div>
             <Progress value={currentVlaJob.progress || 0} className="mb-2" />
             <p className="text-xs text-gray-600">
-              {currentVlaJob.progress < 30 && "Extracting visual features..."}
-              {currentVlaJob.progress >= 30 && currentVlaJob.progress < 60 && "Processing language annotations..."}
-              {currentVlaJob.progress >= 60 && currentVlaJob.progress < 90 && "Generating action sequences..."}
-              {currentVlaJob.progress >= 90 && "Finalizing VLA dataset..."}
+              {(currentVlaJob.progress || 0) < 30 && "Extracting visual features..."}
+              {(currentVlaJob.progress || 0) >= 30 && (currentVlaJob.progress || 0) < 60 && "Processing language annotations..."}
+              {(currentVlaJob.progress || 0) >= 60 && (currentVlaJob.progress || 0) < 90 && "Generating action sequences..."}
+              {(currentVlaJob.progress || 0) >= 90 && "Finalizing VLA dataset..."}
             </p>
           </div>
         )}
