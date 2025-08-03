@@ -128,7 +128,8 @@ export default function VlaConversionSection() {
             repeatability: "±0.03mm"
           },
           price: "$35,000 - $50,000",
-          availability: "In Stock"
+          availability: "In Stock",
+          image: "https://images.unsplash.com/photo-1565344555327-d1adb1c6e5b4?w=300&h=150&fit=crop&crop=center&q=80"
         },
         {
           brand: "KUKA",
@@ -141,7 +142,8 @@ export default function VlaConversionSection() {
             repeatability: "±0.02mm"
           },
           price: "$25,000 - $35,000",
-          availability: "2-3 weeks"
+          availability: "2-3 weeks",
+          image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&h=150&fit=crop&crop=center&q=80"
         },
         {
           brand: "ABB",
@@ -154,7 +156,8 @@ export default function VlaConversionSection() {
             repeatability: "±0.01mm"
           },
           price: "$20,000 - $30,000",
-          availability: "In Stock"
+          availability: "In Stock",
+          image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=150&fit=crop&crop=center&q=80"
         }
       ];
       
@@ -328,51 +331,57 @@ export default function VlaConversionSection() {
           </div>
 
           {robotRecommendations.length > 0 && (
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {robotRecommendations.map((robot, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-3 bg-gradient-to-r from-accent/5 to-secondary/5">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h5 className="font-medium text-gray-900">{robot.brand} {robot.model}</h5>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <div className="bg-accent text-white text-xs px-2 py-1 rounded">
-                          {Math.round(robot.confidence * 100)}% Match
-                        </div>
-                        <span className="text-xs text-gray-600">{robot.availability}</span>
+                <div key={index} className="border border-gray-200 rounded-lg overflow-hidden bg-white hover:shadow-md transition-shadow">
+                  <div className="relative">
+                    <img 
+                      src={robot.image || `https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=300&h=150&fit=crop&crop=center&q=80`}
+                      alt={`${robot.brand} ${robot.model}`}
+                      className="w-full h-24 object-cover"
+                    />
+                    <div className="absolute top-2 right-2">
+                      <div className="bg-accent text-white text-xs px-2 py-1 rounded-full font-medium">
+                        {Math.round(robot.confidence * 100)}% Match
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-sm font-semibold text-gray-900">{robot.price}</div>
-                    </div>
                   </div>
-                  
-                  <p className="text-xs text-gray-600 mb-2">{robot.reasoning}</p>
-                  
-                  <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div>
-                      <span className="text-gray-500">Payload:</span>
-                      <div className="font-medium">{robot.specs.payload}</div>
+                  <div className="p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h5 className="font-semibold text-gray-900">{robot.brand} {robot.model}</h5>
+                        <span className="text-xs text-gray-600">{robot.availability}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-lg font-bold text-primary">{robot.price}</div>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-gray-500">Reach:</span>
-                      <div className="font-medium">{robot.specs.reach}</div>
+                    
+                    <p className="text-xs text-gray-600 mb-3 line-clamp-2">{robot.reasoning}</p>
+                    
+                    <div className="grid grid-cols-3 gap-2 text-xs mb-3">
+                      <div className="text-center p-2 bg-gray-50 rounded">
+                        <div className="font-medium text-gray-900">{robot.specs.payload}</div>
+                        <div className="text-gray-500">Payload</div>
+                      </div>
+                      <div className="text-center p-2 bg-gray-50 rounded">
+                        <div className="font-medium text-gray-900">{robot.specs.reach}</div>
+                        <div className="text-gray-500">Reach</div>
+                      </div>
+                      <div className="text-center p-2 bg-gray-50 rounded">
+                        <div className="font-medium text-gray-900">{robot.specs.repeatability}</div>
+                        <div className="text-gray-500">Accuracy</div>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-gray-500">Accuracy:</span>
-                      <div className="font-medium">{robot.specs.repeatability}</div>
+                    
+                    <div className="flex space-x-2">
+                      <Button variant="outline" size="sm" className="text-xs flex-1">
+                        View Specs
+                      </Button>
+                      <Button size="sm" className="text-xs flex-1 bg-accent hover:bg-accent/90">
+                        Select Robot
+                      </Button>
                     </div>
-                  </div>
-                  
-                  <div className="flex space-x-2 mt-3">
-                    <Button variant="outline" size="sm" className="text-xs">
-                      View Specs
-                    </Button>
-                    <Button variant="outline" size="sm" className="text-xs">
-                      Get Quote
-                    </Button>
-                    <Button size="sm" className="text-xs bg-accent hover:bg-accent/90">
-                      Select Robot
-                    </Button>
                   </div>
                 </div>
               ))}

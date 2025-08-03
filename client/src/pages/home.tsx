@@ -46,8 +46,8 @@ export default function Home() {
               >
                 Marketplace
               </button>
+              <a href="#enterprise" className="text-gray-600 hover:text-primary transition-colors font-medium">Enterprise VLA</a>
               <a href="#profile" className="text-gray-600 hover:text-primary transition-colors font-medium">Profile</a>
-              <a href="#enterprise" className="text-gray-600 hover:text-primary transition-colors font-medium">Enterprise</a>
             </nav>
           </div>
         </div>
