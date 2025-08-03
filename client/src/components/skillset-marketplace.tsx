@@ -20,6 +20,7 @@ interface SkillsetVLA {
   price: string;
   complexity: 'Beginner' | 'Intermediate' | 'Advanced';
   lastUpdated: string;
+  image: string;
 }
 
 const SAMPLE_VLAS: SkillsetVLA[] = [
@@ -36,7 +37,8 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     tags: ["assembly", "precision", "electronics"],
     price: "$149",
     complexity: "Advanced",
-    lastUpdated: "2 days ago"
+    lastUpdated: "2 days ago",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&h=200&fit=crop&crop=center"
   },
   {
     id: "2",
@@ -51,7 +53,8 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     tags: ["navigation", "inventory", "warehouse"],
     price: "Free",
     complexity: "Intermediate",
-    lastUpdated: "1 week ago"
+    lastUpdated: "1 week ago",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=200&h=200&fit=crop&crop=center"
   },
   {
     id: "3",
@@ -66,7 +69,8 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     tags: ["cooking", "food-prep", "restaurant"],
     price: "$299",
     complexity: "Advanced",
-    lastUpdated: "3 days ago"
+    lastUpdated: "3 days ago",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&h=200&fit=crop&crop=center"
   },
   {
     id: "4",
@@ -81,7 +85,8 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     tags: ["cleaning", "navigation", "home"],
     price: "$49",
     complexity: "Beginner",
-    lastUpdated: "5 days ago"
+    lastUpdated: "5 days ago",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop&crop=center"
   },
   {
     id: "5",
@@ -96,7 +101,8 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     tags: ["surgery", "medical", "precision"],
     price: "$899",
     complexity: "Advanced",
-    lastUpdated: "1 day ago"
+    lastUpdated: "1 day ago",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=200&h=200&fit=crop&crop=center"
   },
   {
     id: "6",
@@ -111,7 +117,8 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     tags: ["agriculture", "watering", "harvesting"],
     price: "$89",
     complexity: "Intermediate",
-    lastUpdated: "1 week ago"
+    lastUpdated: "1 week ago",
+    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=200&h=200&fit=crop&crop=center"
   }
 ];
 
@@ -225,7 +232,19 @@ export default function SkillsetMarketplace() {
           {/* VLA Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredVLAs.map((vla) => (
-              <Card key={vla.id} className="border border-gray-200 hover:shadow-md transition-shadow">
+              <Card key={vla.id} className="border border-gray-200 hover:shadow-md transition-shadow overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src={vla.image} 
+                    alt={vla.name}
+                    className="w-full h-32 object-cover"
+                  />
+                  <div className="absolute top-2 right-2">
+                    <Badge variant={vla.complexity === 'Beginner' ? 'secondary' : vla.complexity === 'Intermediate' ? 'default' : 'destructive'} className="text-xs">
+                      {vla.complexity}
+                    </Badge>
+                  </div>
+                </div>
                 <CardContent className="p-4">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex-1">
@@ -234,9 +253,6 @@ export default function SkillsetMarketplace() {
                     </div>
                     <div className="text-right">
                       <div className="text-lg font-bold text-primary">{vla.price}</div>
-                      <Badge variant={vla.complexity === 'Beginner' ? 'secondary' : vla.complexity === 'Intermediate' ? 'default' : 'destructive'} className="text-xs">
-                        {vla.complexity}
-                      </Badge>
                     </div>
                   </div>
                   

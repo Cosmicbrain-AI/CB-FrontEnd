@@ -6,11 +6,31 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
 const SAMPLE_PROMPTS = [
-  "Train a robotic arm to sort packages by size and weight",
-  "Teach a robot to fold laundry with different fabric types",
-  "Create a cooking assistant robot for meal preparation",
-  "Train a robot to clean and organize workspaces",
-  "Develop navigation skills for warehouse robotics"
+  {
+    title: "Train a robotic arm to sort packages by size and weight",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=200&h=200&fit=crop&crop=center",
+    description: "Warehouse automation and logistics"
+  },
+  {
+    title: "Teach a robot to fold laundry with different fabric types",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop&crop=center",
+    description: "Domestic assistance and care"
+  },
+  {
+    title: "Create a cooking assistant robot for meal preparation",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&h=200&fit=crop&crop=center",
+    description: "Culinary automation"
+  },
+  {
+    title: "Train a robot to clean and organize workspaces",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&h=200&fit=crop&crop=center",
+    description: "Office and facility management"
+  },
+  {
+    title: "Develop navigation skills for warehouse robotics",
+    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=200&h=200&fit=crop&crop=center",
+    description: "Autonomous navigation systems"
+  }
 ];
 
 export default function AIPromptBox() {
@@ -72,14 +92,22 @@ export default function AIPromptBox() {
               
               <div className="mt-4">
                 <p className="text-xs text-gray-600 mb-2">Popular training ideas:</p>
-                <div className="flex flex-wrap gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {SAMPLE_PROMPTS.slice(0, 3).map((sample, index) => (
                     <button
                       key={index}
-                      onClick={() => handleSamplePrompt(sample)}
-                      className="text-xs bg-white border border-gray-200 rounded-full px-3 py-1 hover:bg-primary/5 hover:border-primary/30 transition-colors"
+                      onClick={() => handleSamplePrompt(sample.title)}
+                      className="flex items-center space-x-2 p-2 bg-white border border-gray-200 rounded-lg hover:bg-primary/5 hover:border-primary/30 transition-colors text-left"
                     >
-                      {sample}
+                      <img 
+                        src={sample.image} 
+                        alt={sample.description}
+                        className="w-12 h-12 rounded-md object-cover"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-medium text-gray-900 line-clamp-2">{sample.title}</p>
+                        <p className="text-xs text-gray-500">{sample.description}</p>
+                      </div>
                     </button>
                   ))}
                 </div>
