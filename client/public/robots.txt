@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# This robots.txt file prevents all web crawlers and search engines
+# from indexing any part of this website, keeping it private
