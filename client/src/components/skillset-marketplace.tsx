@@ -38,7 +38,7 @@ const SAMPLE_VLAS: SkillsetVLA[] = [
     price: "$149",
     complexity: "Advanced",
     lastUpdated: "2 days ago",
-    image: "https://images.unsplash.com/photo-1565344555327-d1adb1c6e5b4?w=300&h=200&fit=crop&crop=center&q=80"
+    image: "https://images.unsplash.com/photo-1565087222271-0a9f8a7cb5d2?w=300&h=200&fit=crop&crop=center&q=80"
   },
   {
     id: "2",
