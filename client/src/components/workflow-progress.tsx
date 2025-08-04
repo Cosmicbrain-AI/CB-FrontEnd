@@ -44,9 +44,7 @@ export default function WorkflowProgress() {
 
             {/* Synthetic Step */}
             <div className="flex items-center space-x-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                hasSyntheticProgress ? "bg-secondary" : "bg-gray-200"
-              }`}>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#5129c4]">
                 <Wand2 className={`text-sm ${hasSyntheticProgress ? "text-white" : "text-gray-400"}`} size={16} />
               </div>
               <span className={`text-sm ${hasSyntheticProgress ? "text-secondary" : "text-gray-400"}`}>
