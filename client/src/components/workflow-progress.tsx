@@ -26,9 +26,7 @@ export default function WorkflowProgress() {
           <div className="flex items-center justify-between">
             {/* Upload Step */}
             <div className="flex items-center space-x-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                hasUploads ? "bg-primary" : "bg-gray-200"
-              }`}>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#5129c4]">
                 <CloudUpload className={`text-sm ${hasUploads ? "text-white" : "text-gray-400"}`} size={16} />
               </div>
               <span className={`text-sm font-medium ${hasUploads ? "text-primary" : "text-gray-400"}`}>
