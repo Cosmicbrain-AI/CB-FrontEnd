@@ -299,7 +299,7 @@ export default function SkillsetMarketplace() {
                   
                   <div className="flex flex-wrap gap-1 mb-3">
                     {vla.tags.map((tag, idx) => (
-                      <span key={idx} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                      <span key={idx} className="text-xs px-2 py-1 rounded text-[#f3ebf5] bg-[#5129c4]">
                         {tag}
                       </span>
                     ))}
