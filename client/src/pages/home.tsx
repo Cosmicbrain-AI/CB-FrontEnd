@@ -62,7 +62,7 @@ export default function Home() {
                 Marketplace
               </button>
               <a href="#enterprise" className="text-foreground hover:text-purple-300 transition-all duration-300 hover:bg-purple-500/10 px-4 py-2 rounded-lg font-medium">Enterprise VLA</a>
-              <a href="#profile" className="text-foreground hover:text-purple-300 transition-all duration-300 hover:bg-purple-500/10 px-4 py-2 rounded-lg font-medium">Profile</a>
+              <a href="#signin" className="text-foreground hover:text-purple-300 transition-all duration-300 hover:bg-purple-500/10 px-4 py-2 rounded-lg font-medium">Sign In</a>
             </nav>
           </div>
         </div>
