@@ -7,7 +7,7 @@ import WorkflowProgress from "@/components/workflow-progress";
 import ProcessingQueue from "@/components/processing-queue";
 import AIPromptBox from "@/components/ai-prompt-box";
 import SkillsetMarketplace from "@/components/skillset-marketplace";
-// SVG Logo component will be inline
+// Use inline SVG logo matching the uploaded design
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("upload");
@@ -30,21 +30,21 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg glow-purple overflow-hidden">
-                <svg viewBox="0 0 100 100" className="w-full h-full">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg glow-purple overflow-hidden bg-gradient-to-br from-purple-500/20 to-violet-600/20">
+                <svg viewBox="0 0 100 100" className="w-8 h-8">
                   <defs>
-                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#7c3aed" />
+                    <linearGradient id="cosmicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#60a5fa" />
                       <stop offset="50%" stopColor="#a855f7" />
                       <stop offset="100%" stopColor="#c084fc" />
                     </linearGradient>
                   </defs>
-                  <path d="M20,75 Q20,25 50,25 Q80,25 80,50 Q80,75 50,75 Q35,75 35,60" 
+                  <path d="M25,70 Q25,20 50,20 Q75,20 75,45 L65,35 M75,45 Q75,70 50,70 Q35,70 35,55" 
                         fill="none" 
-                        stroke="url(#logoGradient)" 
-                        strokeWidth="8" 
+                        stroke="url(#cosmicGradient)" 
+                        strokeWidth="6" 
                         strokeLinecap="round"/>
-                  <circle cx="35" cy="60" r="4" fill="url(#logoGradient)"/>
+                  <circle cx="65" cy="35" r="3" fill="url(#cosmicGradient)"/>
                 </svg>
               </div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-violet-400 to-purple-500 bg-clip-text text-transparent">

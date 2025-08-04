@@ -72,7 +72,7 @@ export default function ProcessingQueue() {
     return (
       <div className="mt-8">
         <Card className="shadow-sm border border-gray-200">
-          <CardHeader className="bg-[#360c7a] border-b border-gray-200" style={{ backgroundColor: '#360c7a' }}>
+          <CardHeader className="flex flex-col space-y-1.5 p-6 border-b border-gray-200 ml-[11px] mr-[11px] mt-[3px] mb-[3px] bg-[#220552]" style={{ backgroundColor: '#220552' }}>
             <CardTitle className="flex items-center text-white">
               <List className="text-gray-200 mr-2" size={20} />
               Processing Queue
@@ -93,7 +93,7 @@ export default function ProcessingQueue() {
   return (
     <div className="mt-8">
       <Card className="shadow-sm border border-gray-200">
-        <CardHeader className="bg-[#360c7a] border-b border-gray-200" style={{ backgroundColor: '#360c7a' }}>
+        <CardHeader className="flex flex-col space-y-1.5 p-6 border-b border-gray-200 ml-[11px] mr-[11px] mt-[3px] mb-[3px] bg-[#220552]" style={{ backgroundColor: '#220552' }}>
           <CardTitle className="flex items-center text-white">
             <List className="text-gray-200 mr-2" size={20} />
             Processing Queue
