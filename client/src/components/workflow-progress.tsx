@@ -62,9 +62,7 @@ export default function WorkflowProgress() {
 
             {/* VLA Step */}
             <div className="flex items-center space-x-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                hasVlaProgress ? "bg-accent" : "bg-gray-200"
-              }`}>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#5129c4]">
                 <Cog className={`text-sm ${hasVlaProgress ? "text-white" : "text-gray-400"}`} size={16} />
               </div>
               <span className={`text-sm ${hasVlaProgress ? "text-accent" : "text-gray-400"}`}>
