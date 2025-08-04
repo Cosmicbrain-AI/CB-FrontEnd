@@ -70,6 +70,42 @@
   background: radial-gradient(ellipse 80% 80% at 50% -20%, rgba(120, 66, 255, 0.3), transparent),
               linear-gradient(180deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
   min-height: 100vh;
+  color: white;
+}
+
+/* Ensure text is white on dark backgrounds */
+.dark {
+  color: white;
+}
+
+.dark * {
+  color: inherit;
+}
+
+.dark .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dark .text-foreground {
+  color: white !important;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: white !important;
+}
+
+.dark p, .dark span, .dark div {
+  color: white !important;
+}
+
+/* Override any conflicting text colors */
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700,
+.dark .text-gray-600,
+.dark .text-gray-500,
+.dark .text-black {
+  color: white !important;
 }
 
 /* Custom scrollbar for dark theme */

@@ -119,20 +119,22 @@ export default function VideoUploadSection() {
   };
 
   return (
-    <Card className="overflow-hidden" id="upload">
-      <CardHeader className="bg-primary/5 border-b border-gray-200">
-        <CardTitle className="flex items-center text-gray-900">
-          <CloudUpload className="text-primary mr-2" size={20} />
-          Video Upload
+    <Card className="overflow-hidden card-enhanced glass border-purple-500/30 glow-purple" id="upload">
+      <CardHeader className="border-b border-purple-500/20">
+        <CardTitle className="flex items-center space-x-3">
+          <div className="p-2 bg-gradient-to-br from-purple-500/20 to-violet-500/20 rounded-lg">
+            <CloudUpload className="h-5 w-5 text-purple-400" />
+          </div>
+          <span className="bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">1. Upload Video</span>
         </CardTitle>
-        <p className="text-sm text-gray-600">Upload your source video for processing</p>
+        <p className="text-sm text-white/70">Upload your source video for processing</p>
       </CardHeader>
       
       <CardContent className="p-6">
         {/* Drag and Drop Area */}
         <div
-          className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
-            dragActive ? "border-primary bg-primary/5" : "border-gray-300 hover:border-primary"
+          className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer glass ${
+            dragActive ? "border-purple-400 bg-purple-500/10 glow-purple" : "border-purple-500/30 hover:border-purple-400"
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -140,11 +142,11 @@ export default function VideoUploadSection() {
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
         >
-          <FileVideo className="text-4xl text-gray-400 mb-4 mx-auto" size={64} />
-          <p className="text-lg font-medium text-gray-900 mb-2">Drop video files here</p>
-          <p className="text-sm text-gray-600 mb-4">or click to browse</p>
-          <Button>Select Files</Button>
-          <p className="text-xs text-gray-500 mt-3">Supports MP4, AVI, MOV up to 500MB</p>
+          <FileVideo className="text-purple-400 mb-4 mx-auto" size={64} />
+          <p className="text-lg font-medium text-white mb-2">Drop video files here</p>
+          <p className="text-sm text-white/70 mb-4">or click to browse</p>
+          <Button className="neon-button bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">Select Files</Button>
+          <p className="text-xs text-white/60 mt-3">Supports MP4, AVI, MOV up to 500MB</p>
         </div>
 
         <input
@@ -159,19 +161,19 @@ export default function VideoUploadSection() {
         {/* Uploaded Files List */}
         {videos.length > 0 && (
           <div className="mt-6">
-            <h4 className="text-sm font-medium text-gray-900 mb-3">Uploaded Files</h4>
-            <div className="space-y-2">
+            <h4 className="text-sm font-medium text-white mb-3">Uploaded Files</h4>
+            <div className="space-y-3">
               {videos.map((video) => (
-                <div key={video.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={video.id} className="flex items-center justify-between p-4 glass border border-purple-500/20 rounded-xl hover:bg-purple-500/5 transition-all duration-300">
                   <div className="flex items-center space-x-3">
-                    <FileVideo className="text-primary" size={20} />
+                    <FileVideo className="text-purple-400" size={20} />
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{video.originalName}</p>
-                      <p className="text-xs text-gray-500">{formatFileSize(video.size)}</p>
+                      <p className="text-sm font-medium text-white">{video.originalName}</p>
+                      <p className="text-xs text-white/60">{formatFileSize(video.size)}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className="bg-accent/10 text-accent text-xs px-2 py-1 rounded-full flex items-center">
+                    <span className="bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full flex items-center">
                       <CheckCircle size={12} className="mr-1" />
                       Ready
                     </span>

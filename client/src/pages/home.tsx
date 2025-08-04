@@ -7,6 +7,7 @@ import WorkflowProgress from "@/components/workflow-progress";
 import ProcessingQueue from "@/components/processing-queue";
 import AIPromptBox from "@/components/ai-prompt-box";
 import SkillsetMarketplace from "@/components/skillset-marketplace";
+// SVG Logo component will be inline
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("upload");
@@ -29,8 +30,22 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg glow-purple">
-                <span className="font-bold text-lg text-white">C</span>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg glow-purple overflow-hidden">
+                <svg viewBox="0 0 100 100" className="w-full h-full">
+                  <defs>
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#7c3aed" />
+                      <stop offset="50%" stopColor="#a855f7" />
+                      <stop offset="100%" stopColor="#c084fc" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M20,75 Q20,25 50,25 Q80,25 80,50 Q80,75 50,75 Q35,75 35,60" 
+                        fill="none" 
+                        stroke="url(#logoGradient)" 
+                        strokeWidth="8" 
+                        strokeLinecap="round"/>
+                  <circle cx="35" cy="60" r="4" fill="url(#logoGradient)"/>
+                </svg>
               </div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-violet-400 to-purple-500 bg-clip-text text-transparent">
                 CosmicBrain AI
