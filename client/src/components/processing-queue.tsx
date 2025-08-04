@@ -72,12 +72,12 @@ export default function ProcessingQueue() {
     return (
       <div className="mt-8">
         <Card className="shadow-sm border border-gray-200">
-          <CardHeader className="bg-gray-50 border-b border-gray-200">
-            <CardTitle className="flex items-center text-gray-900">
-              <List className="text-gray-600 mr-2" size={20} />
+          <CardHeader className="bg-[#360c7a] border-b border-gray-200" style={{ backgroundColor: '#360c7a' }}>
+            <CardTitle className="flex items-center text-white">
+              <List className="text-gray-200 mr-2" size={20} />
               Processing Queue
             </CardTitle>
-            <p className="text-sm text-gray-600">Monitor your video processing jobs</p>
+            <p className="text-sm text-gray-200">Monitor your video processing jobs</p>
           </CardHeader>
           <CardContent className="p-6">
             <div className="text-center text-gray-500">
@@ -93,12 +93,12 @@ export default function ProcessingQueue() {
   return (
     <div className="mt-8">
       <Card className="shadow-sm border border-gray-200">
-        <CardHeader className="bg-gray-50 border-b border-gray-200">
-          <CardTitle className="flex items-center text-gray-900">
-            <List className="text-gray-600 mr-2" size={20} />
+        <CardHeader className="bg-[#360c7a] border-b border-gray-200" style={{ backgroundColor: '#360c7a' }}>
+          <CardTitle className="flex items-center text-white">
+            <List className="text-gray-200 mr-2" size={20} />
             Processing Queue
           </CardTitle>
-          <p className="text-sm text-gray-600">Monitor your video processing jobs</p>
+          <p className="text-sm text-gray-200">Monitor your video processing jobs</p>
         </CardHeader>
         
         <CardContent className="p-6">
