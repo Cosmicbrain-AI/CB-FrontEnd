@@ -20,41 +20,55 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Background gradient mesh */}
+      <div className="absolute inset-0 gradient-mesh opacity-30"></div>
+      <div className="relative z-10">
       {/* Header */}
-      <header className="bg-surface shadow-sm border-b border-gray-200 sticky top-0 z-50">
+      <header className="glass border-b border-purple-500/20 sticky top-0 z-50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <h1 className="text-xl font-bold text-gray-900">CosmicBrain AI</h1>
-              <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">Beta</span>
+            <div className="flex items-center space-x-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg glow-purple">
+                <span className="font-bold text-lg text-white">C</span>
+              </div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-violet-400 to-purple-500 bg-clip-text text-transparent">
+                CosmicBrain AI
+              </h1>
+              <span className="bg-gradient-to-r from-purple-500/20 to-violet-500/20 text-purple-300 text-xs px-3 py-1 rounded-full font-medium border border-purple-500/30 glow-purple">
+                Beta
+              </span>
             </div>
-            <nav className="flex space-x-6">
+            <nav className="flex space-x-8">
               <button
                 onClick={() => scrollToSection("platform")}
-                className={`font-medium transition-colors ${
-                  activeSection === "platform" ? "text-primary" : "text-gray-600 hover:text-primary"
+                className={`font-medium transition-all duration-300 px-4 py-2 rounded-lg ${
+                  activeSection === "platform" 
+                    ? "text-purple-300 bg-purple-500/20 glow-purple border border-purple-500/30" 
+                    : "text-foreground hover:text-purple-300 hover:bg-purple-500/10"
                 }`}
               >
                 Platform
               </button>
               <button
                 onClick={() => scrollToSection("marketplace")}
-                className={`font-medium transition-colors ${
-                  activeSection === "marketplace" ? "text-primary" : "text-gray-600 hover:text-primary"
+                className={`font-medium transition-all duration-300 px-4 py-2 rounded-lg ${
+                  activeSection === "marketplace" 
+                    ? "text-purple-300 bg-purple-500/20 glow-purple border border-purple-500/30" 
+                    : "text-foreground hover:text-purple-300 hover:bg-purple-500/10"
                 }`}
               >
                 Marketplace
               </button>
-              <a href="#enterprise" className="text-gray-600 hover:text-primary transition-colors font-medium">Enterprise VLA</a>
-              <a href="#profile" className="text-gray-600 hover:text-primary transition-colors font-medium">Profile</a>
+              <a href="#enterprise" className="text-foreground hover:text-purple-300 transition-all duration-300 hover:bg-purple-500/10 px-4 py-2 rounded-lg font-medium">Enterprise VLA</a>
+              <a href="#profile" className="text-foreground hover:text-purple-300 transition-all duration-300 hover:bg-purple-500/10 px-4 py-2 rounded-lg font-medium">Profile</a>
             </nav>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-20">
         {/* AI Prompt Box */}
         <AIPromptBox />
 
@@ -78,22 +92,23 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-surface border-t border-gray-200 mt-16">
+      <footer className="glass border-t border-purple-500/20 mt-16 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
-              <span className="text-gray-900 font-semibold">CosmicBrain AI</span>
-              <span className="text-gray-600 text-sm">© 2025 CosmicBrain AI</span>
+              <span className="bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent font-semibold">CosmicBrain AI</span>
+              <span className="text-muted-foreground text-sm">© 2025 CosmicBrain AI</span>
             </div>
-            <div className="flex space-x-6 text-sm text-gray-600">
-              <a href="#docs" className="hover:text-primary transition-colors">Documentation</a>
-              <a href="#api" className="hover:text-primary transition-colors">API</a>
-              <a href="#support" className="hover:text-primary transition-colors">Support</a>
-              <a href="#status" className="hover:text-primary transition-colors">System Status</a>
+            <div className="flex space-x-6 text-sm text-muted-foreground">
+              <a href="#docs" className="hover:text-purple-400 transition-colors">Documentation</a>
+              <a href="#api" className="hover:text-purple-400 transition-colors">API</a>
+              <a href="#support" className="hover:text-purple-400 transition-colors">Support</a>
+              <a href="#status" className="hover:text-purple-400 transition-colors">System Status</a>
             </div>
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
