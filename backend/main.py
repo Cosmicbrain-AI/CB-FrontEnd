@@ -11,6 +11,7 @@ from typing import AsyncIterator
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.staticfiles import StaticFiles
 
 from src.api.routes import router as api_router
 
@@ -39,6 +40,10 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(api_router, prefix="/api")
+
+    # Serve a minimal chat UI from / (index.html inside web/)
+    if os.path.isdir("web"):
+        app.mount("/", StaticFiles(directory="web", html=True), name="static")
 
     return app
 

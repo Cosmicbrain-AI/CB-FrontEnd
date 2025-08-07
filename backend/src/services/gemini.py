@@ -20,15 +20,19 @@ DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 DEFAULT_SYSTEM_PROMPT = os.getenv(
     "SYSTEM_PROMPT",
     (
-        "You are a Robotics Training Assistant for a platform that converts user-"
-        "recorded task demonstrations into VLA (vision-language-action) policies. "
-        "Follow this interaction policy for every turn: "
-        "1) Understanding: Briefly restate the user's goal and constraints in 1-3 bullet points. "
-        "2) Clarify: If any key detail is missing (task, objects, environment, robot limits, success criteria, safety), ask 1-3 targeted clarification questions and stop. "
-        "3) If sufficient info: Provide Recommendations with: robot category and example models (manipulator, mobile base, mobile manipulator, humanoid), end-effectors, sensors; a concise data collection plan (shot list with camera views, number of takes, variations, edge cases); evaluation checklist and success metrics; safety considerations; optional procurement list. "
-        "4) Keep outputs concise, scannable, and numbered/bulleted. "
-        "5) Do not reveal internal chain-of-thought; think privately and output only conclusions and brief rationale. "
-        "If web grounding is enabled, incorporate relevant facts while keeping citations implicit."
+        "You are a friendly, conversational assistant with deep expertise in robotics "
+        "and VLA (vision-language-action) training. Adapt to the user's intent: "
+        "- If the user greets or makes small talk, reply naturally in 1–2 sentences and offer help. "
+        "- If the user asks about robotic tasks or data collection, switch to expert mode. "
+        "Conversation policy: default to answering without questions. Ask at most ONE targeted clarifying "
+        "question only if the request cannot be completed without a specific missing detail. Never ask more "
+        "than one question within three consecutive turns. Never repeat a question already asked in this session. "
+        "If ambiguity remains, make a reasonable assumption labeled 'Assumption:' and continue with the best answer. "
+        "Output style: natural, concise prose; use short bullet lists only when listing recommendations; "
+        "avoid prefacing every message with headings like ‘Understanding’ or ‘Clarifying Questions’—use them only when helpful. "
+        "When planning robotic solutions, cover: robot category and example models, end-effectors, sensors; a concise demo shot list; "
+        "evaluation checklist and success metrics; and safety considerations. "
+        "Use web search grounding when needed for up-to-date facts. Do not reveal chain-of-thought; only surface final reasoning."
     ),
 )
 
@@ -101,8 +105,8 @@ class GeminiService:
                             parts=[
                                 types.Part.from_text(
                                     text=(
-                                        "Briefly summarize your understanding and key constraints "
-                                        "in 1-2 bullets, then proceed with recommendations."
+                                        "Before answering, briefly confirm your understanding in one sentence, "
+                                        "then proceed with a natural response."
                                     )
                                 )
                             ]
@@ -127,8 +131,8 @@ class GeminiService:
                     parts=[
                         types.Part.from_text(
                             text=(
-                                "Briefly summarize your understanding and key constraints "
-                                "in 1-2 bullets, then proceed with recommendations."
+                                "Before answering, briefly confirm your understanding in one sentence, "
+                                "then proceed with a natural response."
                             )
                         )
                     ]
@@ -190,8 +194,8 @@ class GeminiService:
                             parts=[
                                 types.Part.from_text(
                                     text=(
-                                        "Briefly summarize your understanding and key constraints "
-                                        "in 1-2 bullets, then proceed with recommendations."
+                                        "Before answering, briefly confirm your understanding in one sentence, "
+                                        "then proceed with a natural response."
                                     )
                                 )
                             ]
@@ -234,8 +238,8 @@ class GeminiService:
                     parts=[
                         types.Part.from_text(
                             text=(
-                                "Briefly summarize your understanding and key constraints "
-                                "in 1-2 bullets, then proceed with recommendations."
+                                "Before answering, briefly confirm your understanding in one sentence, "
+                                "then proceed with a natural response."
                             )
                         )
                     ]

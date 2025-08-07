@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gemini Chat</title>
+    <style>
+      :root { color-scheme: dark; }
+      body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system; background: #0b1020; color: #e6e9ef; }
+      header { padding: 16px 20px; background: #11162a; border-bottom: 1px solid #202844; }
+      h1 { margin: 0; font-size: 16px; font-weight: 600; }
+      .container { display: grid; grid-template-rows: 1fr auto; height: calc(100dvh - 58px); }
+      #messages { padding: 16px; overflow-y: auto; }
+      .msg { margin-bottom: 16px; max-width: 900px; }
+      .role { font-size: 12px; opacity: 0.7; margin-bottom: 4px; }
+      .bubble { background: #121a31; border: 1px solid #1d2750; padding: 12px 14px; border-radius: 10px; white-space: pre-wrap; line-height: 1.5; }
+      .user .bubble { background: #13243d; border-color: #274c85; }
+      .thought { color: #9ad1ff; font-style: italic; opacity: 0.85; }
+      form { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 12px; border-top: 1px solid #202844; background: #0d1327; }
+      textarea { resize: none; height: 64px; padding: 10px; border-radius: 8px; border: 1px solid #20305a; background: #0c142b; color: #e6e9ef; outline: none; }
+      button { padding: 0 16px; border-radius: 8px; border: 1px solid #3751a3; background: #1a2a5a; color: #e6e9ef; cursor: pointer; }
+      .toolbar { display: flex; gap: 10px; align-items: center; padding: 8px 12px; border-bottom: 1px solid #202844; background: #0d1327; }
+      .toolbar input[type="text"] { width: 200px; padding: 6px 8px; border-radius: 6px; border: 1px solid #20305a; background: #0c142b; color: #e6e9ef; }
+      .toolbar label { font-size: 12px; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Gemini Robotics Assistant</h1>
+    </header>
+    <div class="toolbar">
+      <label>Session</label>
+      <input id="sessionId" type="text" placeholder="session id" />
+      <label><input id="includeThoughts" type="checkbox" /> Thought summaries</label>
+      <label><input id="useSearch" type="checkbox" checked /> Google Search</label>
+      <label>Model</label>
+      <input id="model" type="text" placeholder="gemini-2.5-flash (optional)" />
+      <button id="resetBtn" type="button">Reset</button>
+    </div>
+    <div class="container">
+      <div id="messages"></div>
+      <form id="chatForm">
+        <textarea id="input" placeholder="Type a message... (Shift+Enter for newline)"></textarea>
+        <button>Send</button>
+      </form>
+    </div>
+
+    <script>
+      const API = location.origin;
+      const messagesEl = document.getElementById('messages');
+      const inputEl = document.getElementById('input');
+      const formEl = document.getElementById('chatForm');
+      const sessionEl = document.getElementById('sessionId');
+      const thoughtsEl = document.getElementById('includeThoughts');
+      const searchEl = document.getElementById('useSearch');
+      const modelEl = document.getElementById('model');
+      const resetBtn = document.getElementById('resetBtn');
+
+      function addMessage(role, text, isThought=false) {
+        const wrap = document.createElement('div');
+        wrap.className = `msg ${role}`;
+        const roleEl = document.createElement('div');
+        roleEl.className = 'role';
+        roleEl.textContent = role === 'user' ? 'You' : (isThought ? 'Model (thought)' : 'Model');
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.innerHTML = isThought ? `<span class="thought">${escapeHtml(text)}</span>` : mdToHtml(text);
+        wrap.appendChild(roleEl); wrap.appendChild(bubble);
+        messagesEl.appendChild(wrap);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        return bubble;
+      }
+
+      function escapeHtml(s) {
+        return s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+      }
+
+      function mdToHtml(s) {
+        // very small markdown subset: headings, bold, code blocks
+        s = escapeHtml(s)
+          .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+          .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+          .replace(/^# (.*)$/gm, '<h1>$1</h1>')
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        s = s.replace(/```[a-zA-Z0-9]*\n([\s\S]*?)\n```/g, '<pre><code>$1</code></pre>');
+        return s.replace(/\n/g, '<br/>');
+      }
+
+      async function resetSession() {
+        const session_id = sessionEl.value.trim();
+        if (!session_id) return;
+        await fetch(`${API}/api/chat/reset`, {
+          method: 'POST', headers: {'content-type':'application/json'},
+          body: JSON.stringify({session_id})
+        });
+        addMessage('assistant', `Session ${session_id} reset.`);
+      }
+
+      resetBtn.addEventListener('click', resetSession);
+
+      formEl.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const msg = inputEl.value.trim();
+        if (!msg) return;
+        addMessage('user', msg);
+        inputEl.value = '';
+
+        const payload = {
+          message: msg,
+          session_id: sessionEl.value.trim() || undefined,
+          google_search: searchEl.checked,
+          include_thoughts: thoughtsEl.checked,
+          thinking_budget: thoughtsEl.checked ? -1 : undefined,
+          model: modelEl.value.trim() || undefined,
+        };
+
+        const res = await fetch(`${API}/api/chat/stream`, {
+          method: 'POST', headers: {'content-type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let assistantBuffer = '';
+        const liveBubble = addMessage('assistant', '');
+
+        // stream parse SSE: lines starting with "data: " and ending with \n\n
+        async function read() {
+          const {value, done} = await reader.read();
+          if (done) {
+            if (assistantBuffer) liveBubble.innerHTML = mdToHtml(assistantBuffer);
+            return;
+          }
+          const chunk = decoder.decode(value, {stream: true});
+          chunk.split('\n\n').forEach(block => {
+            if (!block.startsWith('data: ')) return;
+            const data = block.slice(6);
+            if (data === '[DONE]') return;
+            if (data.startsWith('[THOUGHT]')) {
+              const span = document.createElement('div');
+              span.className = 'thought';
+              span.textContent = data.replace('[THOUGHT]','');
+              liveBubble.appendChild(span);
+              return;
+            }
+            assistantBuffer += data;
+            liveBubble.textContent = assistantBuffer;
+          });
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+          read();
+        }
+        read();
+      });
+
+      // UX: Shift+Enter → newline, Enter → send
+      inputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          formEl.requestSubmit();
+        }
+      });
+    </script>
+  </body>
+  </html>
+
